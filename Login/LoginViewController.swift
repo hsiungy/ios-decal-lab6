@@ -18,6 +18,11 @@ class LoginViewController: UIViewController {
     }
 
     // TODO: instantiate the views needed for your project
+    var label = UILabel()
+    var loginView = UIView()
+    var usernameTextField = UITextField()
+    var passwordTextField = UITextField()
+    var loginButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,11 +30,66 @@ class LoginViewController: UIViewController {
         
         // TODO: Add your views either as subviews of `view` or subviews of each other using `addSubview`
         
+        label = UILabel(frame:CGRect(x: 0,
+                                     y: 0,
+                                     width: UIScreen.main.bounds.width,
+                                     height: 300))
+        label.text = "Login View Controller"
+        label.numberOfLines = 2
+        label.textColor = .white
+        label.font = UIFont(name: "Avenir", size: 50)
+        label.textAlignment = .center
+        
+        view.addSubview(label)
+        
+        loginView = UIView(frame:CGRect(x: 0,
+                                        y: 0,
+                                        width: UIScreen.main.bounds.width * 0.9,
+                                        height: 120))
+        loginView.backgroundColor = .white
+        loginView.center = view.center
+        loginView.layer.cornerRadius = 10
+        loginView.layer.masksToBounds = true
+        view.addSubview(loginView)
         // TODO: layout your views using frames or AutoLayout
+        loginButton.setTitle("Login", for: .normal)
+        loginButton.backgroundColor = Constants.backgroundColor
+        loginButton.setTitleColor(.white, for: .normal)
+        loginButton.titleLabel?.font = UIFont(name: "Avenir", size: 15)
+        loginButton.titleLabel?.textAlignment = .center
+        loginButton.center = loginView.center
+        loginButton.layer.cornerRadius = 10
+        loginButton.layer.masksToBounds = true
+        loginView.addSubview(loginButton)
+        usernameTextField.placeholder = "@berkeley.edu account"
+        passwordTextField.placeholder = "Password"
+        loginView.addSubview(usernameTextField)
+        loginView.addSubview(passwordTextField)
+        
+        loginButton.translatesAutoresizingMaskIntoConstraints = false
+        usernameTextField.translatesAutoresizingMaskIntoConstraints = false
+        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
+        let myConstraints = [loginButton.leadingAnchor.constraint(equalTo: loginView.leadingAnchor, constant: 70),
+                              loginButton.trailingAnchor.constraint(equalTo: loginView.trailingAnchor, constant: -70),
+                              loginButton.centerXAnchor.constraint(equalTo: loginView.centerXAnchor),
+                              loginButton.bottomAnchor.constraint(equalTo: loginView.bottomAnchor, constant: -8),
+                              usernameTextField.centerXAnchor.constraint(equalTo: loginView.centerXAnchor),
+                              passwordTextField.centerXAnchor.constraint(equalTo: loginView.centerXAnchor),
+                              usernameTextField.heightAnchor.constraint(equalToConstant: 25),
+                              passwordTextField.heightAnchor.constraint(equalToConstant: 25),
+                              usernameTextField.topAnchor.constraint(equalTo: loginView.topAnchor, constant: 8),
+                              passwordTextField.topAnchor.constraint(equalTo: usernameTextField.bottomAnchor, constant: 8),
+                              usernameTextField.leadingAnchor.constraint(equalTo: loginView.leadingAnchor, constant: 8),
+                              passwordTextField.leadingAnchor.constraint(equalTo: loginView.leadingAnchor, constant: 8),
+                              loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 8)]
+        NSLayoutConstraint.activate(myConstraints)
+        
     }
     
     // TODO: create an IBAction for your login button
-    
+    @IBAction func afterLogin(sender: UIButton) {
+        
+    }
     
     
     
