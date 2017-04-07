@@ -49,7 +49,6 @@ class LoginViewController: UIViewController {
         loginView.backgroundColor = .white
         loginView.center = view.center
         loginView.layer.cornerRadius = 10
-        loginView.layer.masksToBounds = true
         view.addSubview(loginView)
         // TODO: layout your views using frames or AutoLayout
         loginButton.setTitle("Login", for: .normal)
@@ -59,7 +58,6 @@ class LoginViewController: UIViewController {
         loginButton.titleLabel?.textAlignment = .center
         loginButton.center = loginView.center
         loginButton.layer.cornerRadius = 10
-        loginButton.layer.masksToBounds = true
         loginView.addSubview(loginButton)
         usernameTextField.placeholder = "@berkeley.edu account"
         passwordTextField.placeholder = "Password"
@@ -83,15 +81,13 @@ class LoginViewController: UIViewController {
                               passwordTextField.leadingAnchor.constraint(equalTo: loginView.leadingAnchor, constant: 8),
                               loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 8)]
         NSLayoutConstraint.activate(myConstraints)
-        
+        loginButton.addTarget(self, action: #selector(afterLogin), for: .touchDown)
     }
     
     // TODO: create an IBAction for your login button
     @IBAction func afterLogin(sender: UIButton) {
-        
+        authenticateUser(username: usernameTextField.text, password: passwordTextField.text)
     }
-    
-    
     
     
     /// YOU DO NOT NEED TO MODIFY ANY OF THE CODE BELOW (but you will want to use `authenticateUser` at some point)
